@@ -1,23 +1,26 @@
 const time = document.querySelector(".time");
 
-function RealTime(tag) {
+function TimeDisplay(classTime) {
   this.isClicked = true;
-  tag.addEventListener("click", () => {
+  classTime.addEventListener("click", () => {
     this.isClicked = !this.isClicked;
   });
-  this.fullTime = function () {
-    tag.innerHTML = new Date().toTimeString().split(" ")[0];
+  this.fullTimeFormat = function () {
+    classTime.innerHTML = new Date().toLocaleTimeString();
   };
-  this.shotTime = function () {
-    tag.innerHTML = new Date().toTimeString().split(" ")[0].substring(0, 5);
+  this.shortTimeFormat = function () {
+    classTime.innerHTML = new Date()
+      .toTimeString()
+      .split(" ")[0]
+      .substring(0, 5);
   };
   setInterval(() => {
     if (this.isClicked) {
-      this.fullTime();
+      this.fullTimeFormat();
     } else {
-      this.shotTime();
+      this.shortTimeFormat();
     }
   }, 1000);
 }
 
-const constructorTime = new RealTime(time);
+const objectTime = new TimeDisplay(time);
